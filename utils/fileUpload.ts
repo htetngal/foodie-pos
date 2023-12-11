@@ -24,24 +24,23 @@ export const fileUpload = multer({
   }),
 }).array("files", 1);
 
-const generateLinkForQRCode = (companyId: number, tableId: number) => {
-  return `${config.orderAppUrl}?companyId=${companyId}&tableId=${tableId}`;
+const generateLinkForQRCode = (tableId: number) => {
+  return `${config.orderAppUrl}?tableId=${tableId}`;
 };
 
-export const getQrCodeUrl = (companyId: number, tableId: number) => {
-  return `https://msquarefdc.sgp1.cdn.digitaloceanspaces.com/foodie-pos/htet-nge-nge-ko/qrcode/companyId-${companyId}-tableId-${tableId}.png`;
+export const getQrCodeUrl = (tableId: number) => {
+  return `https://msquarefdc.sgp1.cdn.digitaloceanspaces.com/foodie-pos/htet-nge-nge-ko/qrcode/tableId-${tableId}.png`;
 };
 
-export const qrCodeImageUpload = async (companyId: number, tableId: number) => {
+export const qrCodeImageUpload = async (tableId: number) => {
   try {
-    const qrCodeData = await QRCode.toDataURL(
-      generateLinkForQRCode(companyId, tableId),
-      { scale: 20 }
-    );
+    const qrCodeData = await QRCode.toDataURL(generateLinkForQRCode(tableId), {
+      scale: 20,
+    });
 
     const input = {
       Bucket: "msquarefdc",
-      Key: `foodie-pos/htet-nge-nge-ko/qrcode/companyId-${companyId}-tableId-${tableId}.png`,
+      Key: `foodie-pos/htet-nge-nge-ko/qrcode/tableId-${tableId}.png`,
       ACL: "public-read",
       Body: Buffer.from(
         qrCodeData.replace(/^data:image\/\w+;base64,/, ""),

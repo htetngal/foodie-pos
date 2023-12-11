@@ -9,16 +9,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { companyId, tableId } = req.query;
+  const { tableId } = req.query;
   if (req.method === "GET") {
-    if (companyId && tableId) {
-      const locations = await prisma.location.findMany({
-        where: { companyId: Number(companyId) },
+    if (tableId) {
+      const table = await prisma.table.findFirst({
+        where: { id: Number(tableId) },
       });
-      const locationIds = locations.map((location) => location.id);
+
+      const orders = await prisma.order.findMany({
+        where: { tableId: Number(tableId) },
+      });
+
+      const location = await prisma.location.findFirst({
+        where: { id: table?.locationId },
+      });
+
+      const company = await prisma.company.findFirst({
+        where: { id: location?.companyId },
+      });
 
       let menuCategories = await prisma.menuCategory.findMany({
-        where: { companyId: Number(companyId), isArchived: false },
+        where: { companyId: company?.id, isArchived: false },
       });
       const menuCategoryIds = menuCategories.map((item) => item.id);
 
@@ -65,16 +76,17 @@ export default async function handler(
       });
 
       return res.status(200).json({
-        locations,
+        locations: [location],
         menuCategories,
         menus,
         menuCategoryMenus,
         addonCategories,
         menuAddonCategories,
         addons,
-        tables: [],
+        tables: [table],
         disabledLocationMenuCategories: [],
         disabledLocationMenus: [],
+        orders,
       });
     } else {
       const session = await getServerSession(req, res, authOptions);
@@ -148,8 +160,8 @@ export default async function handler(
           data: { name: tableName, locationId: location.id, assetUrl: "" },
         });
 
-        await qrCodeImageUpload(newCompany.id, table.id);
-        const assetUrl = getQrCodeUrl(newCompany.id, table.id);
+        await qrCodeImageUpload(table.id);
+        const assetUrl = getQrCodeUrl(table.id);
 
         const tables = await prisma.table.update({
           data: { assetUrl },
@@ -167,6 +179,7 @@ export default async function handler(
           tables: [table],
           disabledLocationMenuCategories: [],
           disabledLocationMenus: [],
+          orders: [],
         });
       } else {
         const companyId = dbUser.companyId;
@@ -210,6 +223,8 @@ export default async function handler(
           where: { locationId: { in: locationIds }, isArchived: false },
         });
 
+        const tableIds = tables.map((table) => table.id);
+
         const disabledLocationMenuCategories =
           await prisma.disabledLocationMenuCategory.findMany({
             where: { menuCategoryId: { in: menuCategoryIds } },
@@ -219,6 +234,10 @@ export default async function handler(
           await prisma.disabledLocationMenu.findMany({
             where: { menuId: { in: menuIds } },
           });
+
+        const orders = await prisma.order.findMany({
+          where: { tableId: { in: tableIds }, isArchived: false },
+        });
 
         return res.status(200).json({
           locations,
@@ -231,6 +250,7 @@ export default async function handler(
           tables,
           disabledLocationMenuCategories,
           disabledLocationMenus,
+          orders,
         });
       }
     }

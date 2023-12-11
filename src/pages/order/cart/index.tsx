@@ -26,7 +26,7 @@ const index = () => {
 
   const onSuccess = (orders: Order[]) => {
     router.push({
-      pathname: `activeOrder/${orders[0].orderSeq}`,
+      pathname: `active-order/${orders[0].orderSeq}`,
       query: { tableId },
     });
     console.log("2");

@@ -2,7 +2,9 @@
 const nextConfig = {
     images:{
         remotePatterns:[
-            {protocol:"https", hostname:"msquarefdc.sgp1.digitaloceanspaces.com",port: ''}
+            {protocol:"https", hostname:"msquarefdc.sgp1.digitaloceanspaces.com",port: ''},
+          
+           
         ]
     }
  
