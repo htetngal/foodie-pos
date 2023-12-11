@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const menuCategoryDetails = () => {
+const MenuCategoryDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const menuCategoryId = Number(router.query.id);
@@ -118,4 +118,4 @@ const menuCategoryDetails = () => {
   );
 };
 
-export default menuCategoryDetails;
+export default MenuCategoryDetails;

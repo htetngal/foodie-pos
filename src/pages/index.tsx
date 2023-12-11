@@ -207,7 +207,7 @@ export default function Home() {
           </Typography>
 
           <Button variant="contained" color="success" sx={{ mb: 2 }}>
-            Start Now-it's free
+            Start Now-it&apos;s free
           </Button>
           <Typography>Free, Forever with unlimited users.</Typography>
         </Box>

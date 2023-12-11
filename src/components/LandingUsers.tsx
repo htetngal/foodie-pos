@@ -77,7 +77,7 @@ const LandingUsers = () => {
         }}
       >
         <Typography variant={"h2"} className={dancingScript.className}>
-          "Join 12 million users"
+          &quot;Join 12 million users&quot;
         </Typography>
         <Typography>who grow their business with Foodie Pos.</Typography>
       </Box>
@@ -94,9 +94,9 @@ const LandingUsers = () => {
         }}
       >
         <Typography variant="h5">
-          " Foodie POS is very helpful in assisting us in making high-quality
-          decisions. It's integrated, user-friendly, and last but not least, it
-          offers exceptional value for the price "
+          &quot; Foodie POS is very helpful in assisting us in making
+          high-quality decisions. It&apos;s integrated, user-friendly, and last
+          but not least, it offers exceptional value for the price &quot;
         </Typography>
         <Typography sx={{ textAlign: "right" }}>
           Austin <br /> CEO of BurgerKing

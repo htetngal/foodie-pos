@@ -5,7 +5,7 @@ import { Order } from "@prisma/client";
 import { useRouter } from "next/router";
 import { formatOrderItem } from "../../../../../utils/general";
 
-const index = () => {
+const Index = () => {
   const router = useRouter();
   const orderSeq = router.query.id;
   const allOrders = useAppSelector((state) => state.order.items);
@@ -63,4 +63,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

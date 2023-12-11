@@ -5,7 +5,7 @@ import { MenuCategory } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const orderApp = () => {
+const OrderApp = () => {
   const router = useRouter();
   const query = router.query;
   const [value, setValue] = useState(0);
@@ -66,4 +66,4 @@ const orderApp = () => {
   );
 };
 
-export default orderApp;
+export default OrderApp;

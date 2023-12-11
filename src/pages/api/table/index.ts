@@ -28,8 +28,8 @@ export default async function handler(
 
     const companyId = dbUser.companyId;
     const tableId = table.id;
-    await qrCodeImageUpload(companyId, tableId);
-    const assetUrl = getQrCodeUrl(companyId, tableId);
+    await qrCodeImageUpload(tableId);
+    const assetUrl = getQrCodeUrl(tableId);
     const newTable = await prisma.table.update({
       data: { assetUrl },
       where: { id: tableId },

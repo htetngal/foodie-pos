@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const orderDetails = () => {
+const OrderDetails = () => {
   const { query, isReady, ...router } = useRouter();
   const dispatch = useAppDispatch();
   const menuId = Number(query.id);
@@ -126,4 +126,4 @@ const orderDetails = () => {
   );
 };
 
-export default orderDetails;
+export default OrderDetails;

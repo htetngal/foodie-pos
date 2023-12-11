@@ -8,7 +8,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const tableDetails = () => {
+const TableDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const tableId = Number(router.query.id);
@@ -82,4 +82,4 @@ const tableDetails = () => {
   );
 };
 
-export default tableDetails;
+export default TableDetails;

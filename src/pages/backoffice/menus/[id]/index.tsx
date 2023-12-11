@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
 import { config } from "../../../../../utils/config";
 
-const menuDetails = () => {
+const MenuDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const menuId = Number(router.query.id);
@@ -186,4 +186,4 @@ const menuDetails = () => {
   );
 };
 
-export default menuDetails;
+export default MenuDetails;

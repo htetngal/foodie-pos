@@ -13,7 +13,7 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const addonCategoryDetails = () => {
+const AddonCategoryDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const addonCategoryId = Number(router.query.id);
@@ -110,4 +110,4 @@ const addonCategoryDetails = () => {
   );
 };
 
-export default addonCategoryDetails;
+export default AddonCategoryDetails;

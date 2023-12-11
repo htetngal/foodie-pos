@@ -17,7 +17,7 @@ import { Addon, Order } from "@prisma/client";
 import { useRouter } from "next/router";
 import { getCartTotalPrice } from "../../../../utils/general";
 
-const index = () => {
+const Index = () => {
   const { query, ...router } = useRouter();
   const tableId = Number(query.tableId);
   const cartItems = useAppSelector((state) => state.cart.items);
@@ -40,7 +40,10 @@ const index = () => {
         (item) => item.id === addon.addonCategoryId
       );
       return (
-        <Box sx={{ display: "flex", flexDirection: "column", pl: 6 }}>
+        <Box
+          key={addon.id}
+          sx={{ display: "flex", flexDirection: "column", pl: 6 }}
+        >
           <Typography sx={{ fontStyle: "italic" }}>
             {addonCategory?.name}
           </Typography>
@@ -158,4 +161,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

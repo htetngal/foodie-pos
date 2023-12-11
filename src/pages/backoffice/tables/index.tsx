@@ -6,7 +6,7 @@ import { Box, Button } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 
-const tables = () => {
+const Tables = () => {
   const tables = useAppSelector((state) => state.table.items);
   const [open, setOpen] = useState(false);
 
@@ -48,4 +48,4 @@ const tables = () => {
   );
 };
 
-export default tables;
+export default Tables;

@@ -19,7 +19,7 @@ import { AddonCategory } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const addonDetails = () => {
+const AddonDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const addonId = Number(router.query.id);
@@ -136,4 +136,4 @@ const addonDetails = () => {
   );
 };
 
-export default addonDetails;
+export default AddonDetails;

@@ -8,7 +8,7 @@ import { Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const locationDetails = () => {
+const LocationDetails = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const locationId = Number(router.query.id);
@@ -89,4 +89,4 @@ const locationDetails = () => {
   );
 };
 
-export default locationDetails;
+export default LocationDetails;
