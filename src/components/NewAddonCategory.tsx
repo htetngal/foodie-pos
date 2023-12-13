@@ -35,6 +35,13 @@ const NewAddonCategory = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New AddonCategory is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleOnChange = (evt: SelectChangeEvent<number[]>) => {

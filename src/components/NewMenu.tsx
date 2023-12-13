@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createNewMenu } from "@/store/slices/menuSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CreateNewMenuOptions } from "@/types/menu";
 import {
   Box,
@@ -38,6 +39,13 @@ const NewMenuComponent = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New Menu is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleOnChange = (evt: SelectChangeEvent<number[]>) => {

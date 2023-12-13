@@ -1,6 +1,7 @@
 import MultiSelect from "@/components/MultiSelect";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { updateMenuFunction } from "@/store/slices/menuSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { UpdateMenuOptions } from "@/types/menu";
 import {
   Box,
@@ -60,6 +61,13 @@ const MenuDetails = () => {
 
   const onSuccess = () => {
     router.back();
+    dispatch(
+      setOpenSnackbar({
+        message: "Menu is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   if (!menu || !data) return null;

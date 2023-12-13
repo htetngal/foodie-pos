@@ -22,6 +22,13 @@ const NewMenuCategory = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New Menu Category is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
   const handleCreateNewMenuCategory = () => {
     const SelectedlocationId = localStorage.getItem("selectedLocationId");

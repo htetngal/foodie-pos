@@ -3,6 +3,7 @@ import {
   deleteMenuCategoryFunction,
   updateMenuCategory,
 } from "@/store/slices/menuCategorySlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { UpdateMenuCategoryOptions } from "@/types/menuCategory";
 import {
   Box,
@@ -51,6 +52,13 @@ const MenuCategoryDetails = () => {
 
   const onSuccess = () => {
     router.push("/backoffice/menu-categories");
+    dispatch(
+      setOpenSnackbar({
+        message: "Menu-category is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleUpdateMenuCategory = () => {

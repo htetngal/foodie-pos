@@ -3,6 +3,7 @@ import {
   deleteLocationFunction,
   updateLocationFunction,
 } from "@/store/slices/locationSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { UpdateLocationOptions } from "@/types/location";
 import { Box, Button, TextField } from "@mui/material";
 import { useRouter } from "next/router";
@@ -23,7 +24,9 @@ const LocationDetails = () => {
       setData({
         id: currentLocation.id,
         name: currentLocation.name,
-        address: currentLocation.address,
+        street: currentLocation.street,
+        township: currentLocation.township,
+        city: currentLocation.city,
       });
     }
   }, [currentLocation]);
@@ -32,6 +35,13 @@ const LocationDetails = () => {
 
   const onSuccess = () => {
     router.back();
+    dispatch(
+      setOpenSnackbar({
+        message: "Location is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleUpdateLocation = () => {
@@ -57,10 +67,23 @@ const LocationDetails = () => {
         />
 
         <TextField
-          label="Address"
-          defaultValue={currentLocation.address}
+          label="Street"
+          defaultValue={currentLocation.street}
           sx={{ m: "15px" }}
-          onChange={(evt) => setData({ ...data, address: evt.target.value })}
+          onChange={(evt) => setData({ ...data, street: evt.target.value })}
+        />
+
+        <TextField
+          label="City"
+          defaultValue={currentLocation.city}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, city: evt.target.value })}
+        />
+        <TextField
+          label="Township"
+          defaultValue={currentLocation.township}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, township: evt.target.value })}
         />
       </Box>
       <Box

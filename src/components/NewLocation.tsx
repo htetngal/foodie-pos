@@ -1,5 +1,6 @@
 import { useAppDispatch } from "@/store/hooks";
 import { createLocationFunction } from "@/store/slices/locationSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CreateLocationOptions } from "@/types/location";
 import {
   Box,
@@ -19,7 +20,9 @@ interface Props {
 
 const defaultLocation: CreateLocationOptions = {
   name: "",
-  address: "",
+  street: "",
+  township: "",
+  city: "",
   companyId: 0,
 };
 
@@ -29,6 +32,23 @@ const NewLocation = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New Location is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
+  };
+
+  const onError = () => {
+    dispatch(
+      setOpenSnackbar({
+        message: "Something Wrong",
+        severity: "error",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleCreateLocation = () => {
@@ -55,12 +75,30 @@ const NewLocation = ({ open, setOpen }: Props) => {
             }
           />
           <TextField
-            label="Address"
+            label="Street"
             variant="outlined"
             autoFocus
             sx={{ width: "100%", mt: "10px" }}
             onChange={(evt) =>
-              setLocation({ ...location, address: evt.target.value })
+              setLocation({ ...location, street: evt.target.value })
+            }
+          />
+          <TextField
+            label="Township"
+            variant="outlined"
+            autoFocus
+            sx={{ width: "100%", mt: "10px" }}
+            onChange={(evt) =>
+              setLocation({ ...location, township: evt.target.value })
+            }
+          />
+          <TextField
+            label="City"
+            variant="outlined"
+            autoFocus
+            sx={{ width: "100%", mt: "10px" }}
+            onChange={(evt) =>
+              setLocation({ ...location, city: evt.target.value })
             }
           />
         </DialogContent>

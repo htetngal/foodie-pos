@@ -3,6 +3,7 @@ import addonCategoryReducer from "./slices/addonCategorySlice";
 import addonReducer from "./slices/addonSlice";
 import appReducer from "./slices/appSlice";
 import cartReducer from "./slices/cartSlice";
+import companyReducer from "./slices/companySlice";
 import disabledLocationMenuCategoryReducer from "./slices/disabledLocationMenuCategorySlice";
 import disabledLocationMenuReducer from "./slices/disabledLocationMenuSlice";
 import locationReducer from "./slices/locationSlice";
@@ -11,6 +12,7 @@ import menuCategoryMenuReducer from "./slices/menuCategoryMenuSlice";
 import menuCategoryReducer from "./slices/menuCategorySlice";
 import menuReducer from "./slices/menuSlice";
 import orderReducer from "./slices/orderSlice";
+import snackbarReducer from "./slices/snackbarSlice";
 import tableReducer from "./slices/tableSlice";
 
 export const store = configureStore({
@@ -28,6 +30,8 @@ export const store = configureStore({
     disabledLocationMenu: disabledLocationMenuReducer,
     cart: cartReducer,
     order: orderReducer,
+    company: companyReducer,
+    snackbar: snackbarReducer,
   },
 });
 

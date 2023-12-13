@@ -1,3 +1,4 @@
+import SnackBar from "@/components/SnackBar";
 import Layout from "@/components/layout/Layout";
 import { store } from "@/store";
 import { ThemeProvider } from "@emotion/react";
@@ -14,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <SnackBar />
         </ThemeProvider>
       </Provider>
     </SessionProvider>

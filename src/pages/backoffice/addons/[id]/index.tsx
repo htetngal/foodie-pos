@@ -3,6 +3,7 @@ import {
   deleteAddonFunction,
   updateAddonFunction,
 } from "@/store/slices/addonSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { UpdateAddonOptions } from "@/types/addon";
 import {
   Box,
@@ -42,6 +43,13 @@ const AddonDetails = () => {
 
   const onSuccess = () => {
     router.back();
+    dispatch(
+      setOpenSnackbar({
+        message: "Addon is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
   if (!addon || !data) return null;
 

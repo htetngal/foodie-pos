@@ -1,25 +1,87 @@
-import { useAppSelector } from "@/store/hooks";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { updateCompanyFunction } from "@/store/slices/companySlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
+import { UpdateCompanyOptions } from "@/types/company";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Settings = () => {
-  const locations = useAppSelector((state) => state.location.items);
-  const [locationId, setLocationId] = useState<number>();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const company = useAppSelector((state) => state.company.item);
+  const [data, setData] = useState<UpdateCompanyOptions>();
 
-  const handleChange = (event: SelectChangeEvent<number>) => {
-    localStorage.setItem("selectedLocationId", String(event.target.value));
+  useEffect(() => {
+    if (company) {
+      setData({
+        id: company.id,
+        name: company.name,
+        street: company.street,
+        city: company.city,
+        township: company.township,
+      });
+    }
+  }, [company]);
+
+  if (!company || !data) return null;
+
+  const onSuccess = () => {
+    router.push("/");
+    dispatch(
+      setOpenSnackbar({
+        message: "Your Company Information is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
+  };
+
+  const handleUpdateCompany = () => {
+    dispatch(updateCompanyFunction({ ...data, onSuccess }));
   };
 
   return (
     <Box>
       <FormControl fullWidth>
+        <Typography variant="h3" sx={{ color: "primary.main" }}>
+          Update Company
+        </Typography>
+
+        <TextField
+          label="Name"
+          defaultValue={company.name}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, name: evt.target.value })}
+        />
+        <TextField
+          label="Street"
+          defaultValue={company.street}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, street: evt.target.value })}
+        />
+        <TextField
+          label="Township"
+          defaultValue={company.township}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, township: evt.target.value })}
+        />
+        <TextField
+          label="City"
+          defaultValue={company.city}
+          sx={{ m: "15px" }}
+          onChange={(evt) => setData({ ...data, city: evt.target.value })}
+        />
+      </FormControl>
+      <Button
+        variant="contained"
+        sx={{ m: "20px" }}
+        onClick={handleUpdateCompany}
+      >
+        Update
+      </Button>
+
+      {/* <FormControl fullWidth>
         <InputLabel>Locations</InputLabel>
         <Select value={locationId} label="Locations" onChange={handleChange}>
           {locations.map((item) => (
@@ -28,7 +90,7 @@ const Settings = () => {
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
     </Box>
   );
 };

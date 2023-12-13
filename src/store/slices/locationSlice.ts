@@ -16,14 +16,15 @@ const initialState: LocationSlice = {
 export const createLocationFunction = createAsyncThunk(
   "addon/createLocationFunction",
   async (options: CreateLocationOptions, thunkApi) => {
-    const { name, address, companyId, onSuccess, onError } = options;
+    const { name, street, township, city, companyId, onSuccess, onError } =
+      options;
     console.log(options);
 
     try {
       const response = await fetch(`${config.apiBaseUrl}/location`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ name, address, companyId }),
+        body: JSON.stringify({ name, street, township, city, companyId }),
       });
       const { newLocation } = await response.json();
       thunkApi.dispatch(addLocation(newLocation));
@@ -37,16 +38,15 @@ export const createLocationFunction = createAsyncThunk(
 export const updateLocationFunction = createAsyncThunk(
   "addon/updateLocationFunction",
   async (options: UpdateLocationOptions, thunkApi) => {
-    const { id, name, address, onSuccess, onError } = options;
+    const { id, name, street, township, city, onSuccess, onError } = options;
 
     try {
       const response = await fetch(`${config.apiBaseUrl}/location`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id, name, address }),
+        body: JSON.stringify({ id, name, street, township, city }),
       });
       const { updatedLocation } = await response.json();
-      console.log(updatedLocation);
       thunkApi.dispatch(updateLocation(updatedLocation));
       onSuccess && onSuccess();
     } catch (err) {

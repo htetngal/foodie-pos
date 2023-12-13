@@ -2,6 +2,7 @@ import AddonCategoryBox from "@/components/AddonCategoryBox";
 import QualitySelector from "@/components/QualitySelector";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addToCart } from "@/store/slices/cartSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CartItem } from "@/types/cart";
 import { Box, Button } from "@mui/material";
 import { Addon } from "@prisma/client";
@@ -81,6 +82,13 @@ const OrderDetails = () => {
     };
 
     dispatch(addToCart(newCartItem));
+    dispatch(
+      setOpenSnackbar({
+        message: "Successfully added into your cart.",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
     const pathname = cartItem ? "/order/cart" : "/order";
     router.push({ pathname, query });
   };

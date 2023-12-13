@@ -14,7 +14,7 @@ export default async function handler(
   const method = req.method;
 
   if (method === "POST") {
-    let { name, address, companyId } = req.body;
+    let { name, street, township, city, companyId } = req.body;
     const user = session.user;
     const email = user?.email as string;
     companyId = (await prisma.user.findFirst({ where: { email } }))?.companyId;
@@ -22,17 +22,17 @@ export default async function handler(
     if (!isValid) return res.status(400).send("Bad Request");
 
     const newLocation = await prisma.location.create({
-      data: { name, address, companyId },
+      data: { name, street, township, city, companyId },
     });
 
     return res.status(200).json({ newLocation });
   } else if (method === "PUT") {
-    const { id, name, address } = req.body;
+    const { id, name, street, township, city } = req.body;
     const isValid = id && name;
     if (!isValid) return res.status(400).send("Bad Request");
 
     const updatedLocation = await prisma.location.update({
-      data: { name, address },
+      data: { name, street, township, city },
       where: { id },
     });
 

@@ -76,6 +76,7 @@ export default async function handler(
       });
 
       return res.status(200).json({
+        company: null,
         locations: [location],
         menuCategories,
         menus,
@@ -100,9 +101,17 @@ export default async function handler(
 
       if (!dbUser) {
         const companyName = "Ah Wa Sar";
-        const companyAddress = "No 2, HinTaDa Street, SanChaung";
+
+        const companyStreet = "No2, HinTada Street";
+        const companyTownship = "MyayNiGone";
+        const companyCity = "SanChaung";
         const newCompany = await prisma.company.create({
-          data: { name: companyName, address: companyAddress },
+          data: {
+            name: companyName,
+            street: companyStreet,
+            township: companyTownship,
+            city: companyCity,
+          },
         });
 
         const newUser = await prisma.user.create({
@@ -146,11 +155,15 @@ export default async function handler(
         );
 
         const locationName = "Branch 1";
-        const locationAddress = "SanChaung";
+        const locationStreet = "Main";
+        const locationTownship = "MyayNiGone";
+        const locationCity = "SanChaung";
         const location = await prisma.location.create({
           data: {
             name: locationName,
-            address: locationAddress,
+            street: locationStreet,
+            township: locationTownship,
+            city: locationCity,
             companyId: newCompany.id,
           },
         });
@@ -169,6 +182,7 @@ export default async function handler(
         });
 
         return res.status(200).json({
+          company: newCompany,
           menuCategories: [menuCategory],
           menus: [menu],
           menuCategoryMenus: [menuCategoryMenu],
@@ -183,6 +197,9 @@ export default async function handler(
         });
       } else {
         const companyId = dbUser.companyId;
+        const company = await prisma.company.findFirst({
+          where: { id: companyId },
+        });
 
         const locations = await prisma.location.findMany({
           where: { companyId, isArchived: false },
@@ -240,6 +257,7 @@ export default async function handler(
         });
 
         return res.status(200).json({
+          company,
           locations,
           menuCategories,
           menus,

@@ -1,4 +1,5 @@
 import { useAppDispatch } from "@/store/hooks";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { createTableFunction } from "@/store/slices/tableSlice";
 import { CreateTableOptions } from "@/types/table";
 import {
@@ -28,6 +29,13 @@ const NewTable = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New Table is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleCreateTable = () => {

@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { emptyCart, removeFromCart } from "@/store/slices/cartSlice";
 import { createOrderFunction } from "@/store/slices/orderSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CartItem } from "@/types/cart";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,7 +30,6 @@ const Index = () => {
       pathname: `active-order/${orders[0].orderSeq}`,
       query: { tableId },
     });
-    console.log("2");
     dispatch(emptyCart());
   };
 
@@ -61,6 +61,13 @@ const Index = () => {
 
   const handleDeleteOrder = (cartItem: CartItem) => {
     dispatch(removeFromCart(cartItem));
+    dispatch(
+      setOpenSnackbar({
+        message: `Delete success.`,
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleConfirmOrder = () => {

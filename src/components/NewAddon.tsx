@@ -38,6 +38,13 @@ const NewAddon = ({ open, setOpen }: Props) => {
 
   const onSuccess = () => {
     setOpen(false);
+    dispatch(
+      setOpenSnackbar({
+        message: "New Addon is created successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleOnChange = (evt: SelectChangeEvent<number>) => {

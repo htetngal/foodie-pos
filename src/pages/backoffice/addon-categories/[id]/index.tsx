@@ -1,6 +1,7 @@
 import MultiSelect from "@/components/MultiSelect";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { updateAddonCategoryFunction } from "@/store/slices/addonCategorySlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { UpdateAddonCategory } from "@/types/addonCategory";
 import {
   Box,
@@ -49,6 +50,13 @@ const AddonCategoryDetails = () => {
 
   const onSuccess = () => {
     router.push("/backoffice/addon-categories");
+    dispatch(
+      setOpenSnackbar({
+        message: "Addon-category is updated successfully",
+        severity: "success",
+        autohideDuration: 5000,
+      })
+    );
   };
 
   const handleUpdateAddonCategory = () => {
