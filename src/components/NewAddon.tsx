@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createAddonFunction } from "@/store/slices/addonSlice";
+import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CreateAddonOptions } from "@/types/addon";
 import {
   Box,
