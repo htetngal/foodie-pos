@@ -2,6 +2,7 @@ import { Location } from "@prisma/client";
 
 export interface LocationSlice {
   items: Location[];
+  selectedlocation: Location | null;
   isLoading: boolean;
   error: Error | null;
 }

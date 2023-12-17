@@ -40,7 +40,7 @@ const LandingUsers = () => {
         flexWrap: "wrap",
         background: "url(background.svg) no-repeat",
         backgroundSize: "cover",
-        p: 10,
+        p: { xs: 3, md: 10 },
       }}
     >
       {userInfo.map((item) => (
@@ -62,8 +62,8 @@ const LandingUsers = () => {
 
       <Box
         sx={{
-          width: 750,
-          height: 200,
+          width: { xs: 350, md: 750 },
+          height: { xs: 100, md: 200 },
           backgroundColor: "white",
           display: "flex",
           flexDirection: "column",
@@ -76,24 +76,29 @@ const LandingUsers = () => {
           color: "primary.main",
         }}
       >
-        <Typography variant={"h2"} className={dancingScript.className}>
+        <Typography
+          sx={{ fontSize: { xs: 30, md: 50 } }}
+          className={dancingScript.className}
+        >
           &quot;Join 12 million users&quot;
         </Typography>
-        <Typography>who grow their business with Foodie Pos.</Typography>
+        <Typography sx={{ fontSize: { xs: 15, md: 25 } }}>
+          who grow their business with Foodie Pos.
+        </Typography>
       </Box>
 
       <Box
         sx={{
-          width: "800px",
+          width: { sm: "350px", md: "800px" },
           backgroundColor: "white",
           borderRadius: 3,
-          ml: 3,
+          ml: { sm: 0, md: 3 },
           color: "primary.main",
           p: 3,
           border: "1px solid #FFE194",
         }}
       >
-        <Typography variant="h5">
+        <Typography sx={{ fontSize: { xs: "20px", md: "23px" } }}>
           &quot; Foodie POS is very helpful in assisting us in making
           high-quality decisions. It&apos;s integrated, user-friendly, and last
           but not least, it offers exceptional value for the price &quot;

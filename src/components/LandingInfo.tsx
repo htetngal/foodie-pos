@@ -17,7 +17,7 @@ const LandingInfo = ({ header, info }: Props) => {
   return (
     <Box
       sx={{
-        width: 500,
+        width: { xs: 350, md: 500 },
         height: 150,
         backgroundColor: "info.main",
         p: 2,

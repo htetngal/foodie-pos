@@ -10,15 +10,18 @@ import RedditIcon from "@mui/icons-material/Reddit";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import {
+  AppBar,
   Box,
   Button,
   ButtonGroup,
   IconButton,
+  Toolbar,
   Typography,
   keyframes,
 } from "@mui/material";
 import { Dancing_Script } from "next/font/google";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 const dancingScript = Dancing_Script({ subsets: ["latin"] });
 
@@ -126,6 +129,7 @@ const bounceInButton = keyframes`  0% {
 
 export default function Home() {
   const [bounce, setBounce] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
@@ -136,30 +140,33 @@ export default function Home() {
     <Box
       sx={{ display: "flex", flexDirection: "Column", height: "fit-content" }}
     >
-      <Box
-        sx={{
-          height: "80px",
-          backgroundColor: "info.main",
-          color: "primary.main",
-          position: "sticky",
-          zIndex: 5,
-          top: 0,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          p: 3,
-          borderBottom: "1px solid #4C4C6D",
-        }}
-      >
-        <Typography>Htet Nge</Typography>
-        <Typography sx={{ fontSize: 40 }} className={dancingScript.className}>
-          Foodie Pos
-        </Typography>
-        <Button variant="contained">Try it free</Button>
+      <Box sx={{ mb: 5 }}>
+        <AppBar sx={{ backgroundColor: "info.main", color: "primary.main" }}>
+          <Toolbar>
+            <Typography>Htet Nge</Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: "20px", md: "25px" },
+                ml: "auto",
+                mr: "auto",
+              }}
+              className={dancingScript.className}
+            >
+              Foodie Pos
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => router.push("/backoffice")}
+            >
+              Try it free
+            </Button>
+          </Toolbar>
+        </AppBar>
       </Box>
       <Box
         sx={{
           display: "flex",
+          flexDirection: { xs: "column-reverse", md: "row" },
           alignItems: "center",
           justifyContent: "space-evenly",
         }}
@@ -167,7 +174,7 @@ export default function Home() {
         <Image src={"chef.svg"} alt="" width={300} height={250} />
         <Box
           sx={{
-            width: 800,
+            width: { xs: "100vw", md: "60%" },
             p: 3,
             backgroundColor: "white",
             display: "flex",
@@ -177,23 +184,23 @@ export default function Home() {
           }}
         >
           <Typography
-            variant={"h1"}
             className={dancingScript.className}
             sx={{
               mb: 3,
               textAlign: "center",
               animation: `${bounceInButton} 1.5s both`,
+              fontSize: { xs: "50px", md: "100px" },
             }}
           >
             Serving Perfection:
           </Typography>
           <Typography
-            variant={"h1"}
             className={dancingScript.className}
             sx={{
               mb: 3,
               textAlign: "center",
               animation: `${bounceInTop} 1.5s both`,
+              fontSize: { xs: "50px", md: "100px" },
             }}
           >
             <span style={{ color: "#1B9C85" }}>all in one </span>
@@ -206,7 +213,12 @@ export default function Home() {
             cocktail bar.
           </Typography>
 
-          <Button variant="contained" color="success" sx={{ mb: 2 }}>
+          <Button
+            onClick={() => router.push("/backoffice")}
+            variant="contained"
+            color="success"
+            sx={{ mb: 2 }}
+          >
             Start Now-it&apos;s free
           </Button>
           <Typography>Free, Forever with unlimited users.</Typography>
@@ -240,6 +252,7 @@ export default function Home() {
             display: "flex",
             justifyContent: "space-evenly",
             alignItems: "center",
+            flexWrap: "wrap",
           }}
         >
           <Box
@@ -307,7 +320,9 @@ export default function Home() {
           <Typography color={"secondary.main"} sx={{ mb: 2 }}>
             Contact Us
           </Typography>
-          <ButtonGroup>
+          <ButtonGroup
+            sx={{ display: "flex", flexWrap: { xs: "wrap", md: "nowrap" } }}
+          >
             <IconButton sx={{ color: "info.main" }}>
               <FacebookIcon />
             </IconButton>

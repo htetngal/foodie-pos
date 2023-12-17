@@ -4,11 +4,13 @@ import {
   LocationSlice,
   UpdateLocationOptions,
 } from "@/types/location";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Location } from "@prisma/client";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { config } from "../../../utils/config";
 
 const initialState: LocationSlice = {
   items: [],
+  selectedlocation: null,
   isLoading: false,
   error: null,
 };
@@ -76,13 +78,26 @@ export const locationSlice = createSlice({
   name: "location",
   initialState,
   reducers: {
-    setLocations: (state, action) => {
+    setLocations: (state, action: PayloadAction<Location[]>) => {
       state.items = action.payload;
       const selectedLocationId = localStorage.getItem("selectedLocationId");
       if (!selectedLocationId) {
         const locationId = action.payload[0].id;
         localStorage.setItem("selectedLocationId", String(locationId));
+        state.selectedlocation = action.payload[0];
+      } else {
+        const location = action.payload.find(
+          (item) => item.id === Number(selectedLocationId)
+        );
+        if (location) {
+          state.selectedlocation = location;
+        }
       }
+    },
+
+    setSelectedLocation: (state, action: PayloadAction<Location>) => {
+      state.selectedlocation = action.payload;
+      localStorage.setItem("selectedLocationId", String(action.payload.id));
     },
 
     addLocation: (state, action) => {
@@ -105,6 +120,11 @@ export const locationSlice = createSlice({
   },
 });
 
-export const { setLocations, addLocation, updateLocation, deleteLocation } =
-  locationSlice.actions;
+export const {
+  setLocations,
+  addLocation,
+  updateLocation,
+  deleteLocation,
+  setSelectedLocation,
+} = locationSlice.actions;
 export default locationSlice.reducer;
