@@ -26,8 +26,8 @@ const ItemCard = ({
         elevation={4}
         sx={{
           opacity: isAvailable ? 1 : 0.4,
-          minWidth: "150px",
-          minHeight: "150px",
+          width: "150px",
+          height: "150px",
           p: "10px",
           display: "flex",
           flexDirection: "column",

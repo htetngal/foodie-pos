@@ -79,6 +79,13 @@ const AddonCategoryDetails = () => {
         onChange={(evt) => setData({ ...data, name: evt.target.value })}
       />
 
+      <MultiSelect
+        testIds={data.menuIds}
+        handleOnChange={handleOnChange}
+        categoryName={menus}
+        label="Menu"
+      />
+
       <FormControlLabel
         control={
           <Checkbox
@@ -88,13 +95,6 @@ const AddonCategoryDetails = () => {
         }
         label="Required"
         sx={{ mb: 4 }}
-      />
-
-      <MultiSelect
-        testIds={data.menuIds}
-        handleOnChange={handleOnChange}
-        categoryName={menus}
-        label="Menu"
       />
       <Box
         sx={{

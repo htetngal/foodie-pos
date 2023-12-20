@@ -131,13 +131,13 @@ const MenuDetails = () => {
         <TextField
           label="Name"
           defaultValue={menu.name}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) => setData({ ...data, name: evt.target.value })}
         />
         <TextField
           label="Price"
           defaultValue={menu.price}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) =>
             setData({ ...data, price: Number(evt.target.value) })
           }
@@ -145,7 +145,7 @@ const MenuDetails = () => {
         <TextField
           label="Description"
           defaultValue={menu.description}
-          sx={{ m: "20px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) =>
             setData({ ...data, description: evt.target.value })
           }

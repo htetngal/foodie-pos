@@ -49,12 +49,20 @@ const Index = () => {
           mx: 3,
           bgcolor: "info.main",
           mb: 3,
+          mt: { xs: 3, sm: 0 },
         }}
       >
         <Typography>OrderSeq: {orderSeq}</Typography>
         <Typography>Total Price: {allTotalPrice}</Typography>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {formattedOrderItem.map((item) => (
           <OrderCard key={item.itemId} orderItem={item} isAdmin={false} />
         ))}

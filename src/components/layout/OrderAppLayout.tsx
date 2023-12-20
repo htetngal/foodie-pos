@@ -32,7 +32,7 @@ const OrderAppLayout = ({ children }: Props) => {
       <Box
         sx={{
           position: "relative",
-          top: { xs: 100, sm: 300 },
+          top: { xs: 50, sm: 300 },
         }}
       >
         <Box

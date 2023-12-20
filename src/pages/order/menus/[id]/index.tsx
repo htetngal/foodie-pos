@@ -125,7 +125,7 @@ const OrderDetails = () => {
           variant="contained"
           disabled={disable}
           onClick={handleAddToCart}
-          sx={{ mb: 10 }}
+          sx={{ m: 3 }}
         >
           {cartItem ? "Update Cart" : "Add to Cart"}
         </Button>

@@ -44,38 +44,44 @@ const Settings = () => {
   return (
     <Box>
       <FormControl fullWidth>
-        <Typography variant="h3" sx={{ color: "primary.main" }}>
+        <Typography
+          sx={{
+            color: "primary.main",
+            fontSize: { xs: 30, sm: 40 },
+            textAlign: "center",
+          }}
+        >
           Update Company
         </Typography>
 
         <TextField
           label="Name"
           defaultValue={company.name}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px", mt: "15px" }}
           onChange={(evt) => setData({ ...data, name: evt.target.value })}
         />
         <TextField
           label="Street"
           defaultValue={company.street}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) => setData({ ...data, street: evt.target.value })}
         />
         <TextField
           label="Township"
           defaultValue={company.township}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) => setData({ ...data, township: evt.target.value })}
         />
         <TextField
           label="City"
           defaultValue={company.city}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) => setData({ ...data, city: evt.target.value })}
         />
       </FormControl>
       <Button
         variant="contained"
-        sx={{ m: "20px" }}
+        sx={{ mb: "20px" }}
         onClick={handleUpdateCompany}
       >
         Update

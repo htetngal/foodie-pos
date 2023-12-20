@@ -64,7 +64,18 @@ const NewLocation = ({ open, setOpen }: Props) => {
 
   return (
     <Box>
-      <Dialog open={open} onClose={onSuccess}>
+      <Dialog
+        open={open}
+        onClose={onSuccess}
+        sx={{
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "500px", // Set your width here
+            },
+          },
+        }}
+      >
         <DialogTitle>Create New Location</DialogTitle>
         <DialogContent>
           <TextField
@@ -79,7 +90,6 @@ const NewLocation = ({ open, setOpen }: Props) => {
           <TextField
             label="Street"
             variant="outlined"
-            autoFocus
             sx={{ width: "100%", mt: "10px" }}
             onChange={(evt) =>
               setLocation({ ...location, street: evt.target.value })
@@ -88,7 +98,6 @@ const NewLocation = ({ open, setOpen }: Props) => {
           <TextField
             label="Township"
             variant="outlined"
-            autoFocus
             sx={{ width: "100%", mt: "10px" }}
             onChange={(evt) =>
               setLocation({ ...location, township: evt.target.value })
@@ -97,7 +106,6 @@ const NewLocation = ({ open, setOpen }: Props) => {
           <TextField
             label="City"
             variant="outlined"
-            autoFocus
             sx={{ width: "100%", mt: "10px" }}
             onChange={(evt) =>
               setLocation({ ...location, city: evt.target.value })

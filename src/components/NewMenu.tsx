@@ -75,20 +75,30 @@ const NewMenuComponent = ({ open, setOpen }: Props) => {
 
   return (
     <Box>
-      <Dialog open={open} onClose={onSuccess}>
+      <Dialog
+        open={open}
+        onClose={onSuccess}
+        sx={{
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "500px", // Set your width here
+            },
+          },
+        }}
+      >
         <DialogTitle textAlign={"center"}>Create New Menu</DialogTitle>
         <DialogContent>
           <TextField
             label="Name"
             variant="outlined"
             autoFocus
-            sx={{ width: "100%", mb: 2 }}
+            sx={{ width: "100%", mt: 2, mb: 2 }}
             onChange={(evt) => setMenu({ ...menu, name: evt.target.value })}
           />
           <TextField
             label="Price"
             variant="outlined"
-            autoFocus
             sx={{ width: "100%", mb: 2 }}
             onChange={(evt) =>
               setMenu({ ...menu, price: Number(evt.target.value) })
@@ -97,7 +107,6 @@ const NewMenuComponent = ({ open, setOpen }: Props) => {
           <TextField
             label="Description"
             variant="outlined"
-            autoFocus
             sx={{ width: "100%", mb: 2 }}
             onChange={(evt) =>
               setMenu({ ...menu, description: evt.target.value })

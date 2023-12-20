@@ -75,22 +75,25 @@ const Topbar = () => {
       ) : (
         <span></span>
       )}
-      <Box sx={{ display: { xs: "inharit", sm: "none" } }}>
-        <IconButton
-          onClick={() => setOpen(true)}
-          sx={{ color: "secondary.main" }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer
-          anchor={"left"}
-          open={open}
-          onClose={() => setOpen(false)}
-          onClick={() => setOpen(false)}
-        >
-          <Sidebar />
-        </Drawer>
-      </Box>
+
+      {session && (
+        <Box sx={{ display: { xs: "inharit", sm: "none" } }}>
+          <IconButton
+            onClick={() => setOpen(true)}
+            sx={{ color: "secondary.main" }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Drawer
+            anchor={"left"}
+            open={open}
+            onClose={() => setOpen(false)}
+            onClick={() => setOpen(false)}
+          >
+            <Sidebar />
+          </Drawer>
+        </Box>
+      )}
     </Box>
   );
 };

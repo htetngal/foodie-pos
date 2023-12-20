@@ -22,7 +22,14 @@ const Menus = () => {
           Create New Menu
         </Button>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          mt: 3,
+          justifyContent: { xs: "center", sm: "start" },
+        }}
+      >
         {menus.map((item) => {
           const isExit = disabledLocationMenus.find(
             (disabledLocationMenu) =>

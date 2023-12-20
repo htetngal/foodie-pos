@@ -26,7 +26,6 @@ export const createOrderFunction = createAsyncThunk(
       });
 
       const { orders } = await response.json();
-      console.log("Slice");
       thunkApi.dispatch(setOrders(orders));
       onSuccess && onSuccess(orders);
     } catch {

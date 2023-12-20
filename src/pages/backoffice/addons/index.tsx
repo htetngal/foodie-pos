@@ -11,10 +11,18 @@ const Addons = () => {
   const [open, setopen] = useState(false);
   return (
     <Box>
-      <Button variant="outlined" onClick={() => setopen(true)}>
-        Create New Addon
-      </Button>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="outlined" onClick={() => setopen(true)}>
+          Create New Addon
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "start" },
+        }}
+      >
         {addons.map((item) => (
           <Link
             href={`/backoffice/addons/${item.id}`}

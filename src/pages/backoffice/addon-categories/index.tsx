@@ -17,7 +17,13 @@ const AddonCategories = () => {
         </Button>
       </Box>
 
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "start" },
+        }}
+      >
         {addonCategories.map((item) => (
           <Link
             href={`/backoffice/addon-categories/${item.id}`}

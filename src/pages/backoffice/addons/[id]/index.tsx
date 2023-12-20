@@ -76,13 +76,13 @@ const AddonDetails = () => {
         <TextField
           label="Name"
           defaultValue={addon.name}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) => setData({ ...data, name: evt.target.value })}
         />
         <TextField
           label="Price"
           defaultValue={addon.price}
-          sx={{ m: "15px" }}
+          sx={{ mb: "15px" }}
           onChange={(evt) =>
             setData({ ...data, price: Number(evt.target.value) })
           }

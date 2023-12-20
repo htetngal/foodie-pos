@@ -25,7 +25,7 @@ const OrderAppHeader = (cartItemCount: Props) => {
         width: "100vw",
         top: 0,
         p: { xs: 5, sm: 0 },
-        backgroundColor: "primary.main",
+        backgroundColor: { xs: "primary.main", sm: "transparent" },
       }}
     >
       <Box sx={{ display: { xs: "none", sm: "flex" } }}>
@@ -49,7 +49,7 @@ const OrderAppHeader = (cartItemCount: Props) => {
         <Box
           sx={{
             position: "absolute",
-            top: 40,
+            top: { xs: 20, sm: 40 },
             textAlign: "center",
             color: "secondary.main",
           }}
@@ -71,7 +71,7 @@ const OrderAppHeader = (cartItemCount: Props) => {
           <Box
             sx={{
               position: "absolute",
-              top: 30,
+              top: { xs: 10, sm: 30 },
               right: { xs: 30, sm: 50 },
               display: "flex",
             }}
@@ -86,7 +86,7 @@ const OrderAppHeader = (cartItemCount: Props) => {
           <Box
             sx={{
               position: "absolute",
-              top: 30,
+              top: { xs: 10, sm: 30 },
               right: { xs: 30, sm: 50 },
               color: "secondary.main",
               display: "flex",

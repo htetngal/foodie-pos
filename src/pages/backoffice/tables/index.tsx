@@ -19,8 +19,18 @@ const Tables = () => {
 
   return (
     <Box>
-      <Button onClick={() => setOpen(true)}>Create New Table</Button>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="outlined" onClick={() => setOpen(true)}>
+          Create New Table
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "start" },
+        }}
+      >
         {tables.map((item) => (
           <Box key={item.id}>
             <Link

@@ -45,6 +45,7 @@ const OrderApp = () => {
           onChange={(evt, value) => {
             setValue(value);
           }}
+          variant="scrollable"
           sx={{
             ".Mui-selected": {
               color: "primary.main",
@@ -61,7 +62,16 @@ const OrderApp = () => {
           ))}
         </Tabs>
       </Box>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>{renderMenus()}</Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "flex-start" },
+          mt: 3,
+        }}
+      >
+        {renderMenus()}
+      </Box>
     </Box>
   );
 };

@@ -44,7 +44,18 @@ const NewMenuCategory = ({ open, setOpen }: Props) => {
 
   return (
     <Box>
-      <Dialog open={open} onClose={onSuccess}>
+      <Dialog
+        open={open}
+        onClose={onSuccess}
+        sx={{
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "500px", // Set your width here
+            },
+          },
+        }}
+      >
         <DialogTitle>Create New Menu-Category</DialogTitle>
         <DialogContent>
           <TextField

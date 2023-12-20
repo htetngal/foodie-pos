@@ -14,8 +14,18 @@ const Locations = () => {
   const dispatch = useAppDispatch();
   return (
     <Box>
-      <Button onClick={() => setopen(true)}>Create New Location</Button>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Button variant="outlined" onClick={() => setopen(true)}>
+          Create New Location
+        </Button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: { xs: "center", sm: "start" },
+        }}
+      >
         {locations.map((item) => (
           // <Link
           //   href={`/backoffice/locations/${item.id}`}

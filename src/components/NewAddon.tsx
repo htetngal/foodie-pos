@@ -3,7 +3,6 @@ import { createAddonFunction } from "@/store/slices/addonSlice";
 import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
 import { CreateAddonOptions } from "@/types/addon";
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -58,64 +57,71 @@ const NewAddon = ({ open, setOpen }: Props) => {
   };
 
   return (
-    <Box>
-      <Dialog open={open} onClose={onSuccess}>
-        <DialogTitle>Create New Addon</DialogTitle>
-        <DialogContent sx={{ width: 500 }}>
-          <TextField
-            label="Name"
-            variant="outlined"
-            autoFocus
-            sx={{ width: "100%", my: 2 }}
-            onChange={(evt) => setAddon({ ...addon, name: evt.target.value })}
-          />
+    <Dialog
+      open={open}
+      onClose={onSuccess}
+      sx={{
+        "& .MuiDialog-container": {
+          "& .MuiPaper-root": {
+            width: "100%",
+            maxWidth: "500px", // Set your width here
+          },
+        },
+      }}
+    >
+      <DialogTitle textAlign={"center"}>Create New Addon</DialogTitle>
+      <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
+        <TextField
+          label="Name"
+          variant="outlined"
+          sx={{ width: "100%", my: 2 }}
+          onChange={(evt) => setAddon({ ...addon, name: evt.target.value })}
+        />
 
-          <TextField
-            label="Price"
-            variant="outlined"
-            autoFocus
-            sx={{ width: "100%", mb: 2 }}
-            onChange={(evt) =>
-              setAddon({ ...addon, price: Number(evt.target.value) })
-            }
-          />
+        <TextField
+          label="Price"
+          variant="outlined"
+          sx={{ width: "100%", mb: 2 }}
+          onChange={(evt) =>
+            setAddon({ ...addon, price: Number(evt.target.value) })
+          }
+        />
 
-          <FormControl fullWidth>
-            <InputLabel>Addon Category</InputLabel>
-            <Select
-              value={addon.addonCategoryId}
-              label="Addon Category"
-              onChange={handleOnChange}
-              renderValue={(selectedAddonCategoryId) => {
-                return (
-                  addonCategories.find(
-                    (item) => item.id === selectedAddonCategoryId
-                  ) as AddonCategory
-                ).name;
-              }}
-            >
-              {addonCategories.map((item) => (
-                <MenuItem key={item.id} value={item.id}>
-                  <ListItemText primary={item.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </DialogContent>
-        <DialogActions sx={{ mr: 1, mb: 1 }}>
-          <Button variant="contained" onClick={() => setOpen(false)}>
-            CANCEL
-          </Button>
-          <Button
-            variant="contained"
-            disabled={!addon.name || !addon.addonCategoryId}
-            onClick={handleCreateAddon}
+        <FormControl fullWidth>
+          <InputLabel>Addon Category</InputLabel>
+          <Select
+            value={addon.addonCategoryId}
+            label="Addon Category"
+            onChange={handleOnChange}
+            renderValue={(selectedAddonCategoryId) => {
+              return (
+                addonCategories.find(
+                  (item) => item.id === selectedAddonCategoryId
+                ) as AddonCategory
+              ).name;
+            }}
           >
-            CONFIRM
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+            {addonCategories.map((item) => (
+              <MenuItem key={item.id} value={item.id}>
+                <ListItemText primary={item.name} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </DialogContent>
+      <DialogActions sx={{ mr: 1, mb: 1 }}>
+        <Button variant="contained" onClick={() => setOpen(false)}>
+          CANCEL
+        </Button>
+        <Button
+          variant="contained"
+          disabled={!addon.name || !addon.addonCategoryId}
+          onClick={handleCreateAddon}
+        >
+          CONFIRM
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

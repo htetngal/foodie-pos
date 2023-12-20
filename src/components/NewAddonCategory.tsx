@@ -55,9 +55,22 @@ const NewAddonCategory = ({ open, setOpen }: Props) => {
 
   return (
     <Box>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Create New Addon Category</DialogTitle>
-        <DialogContent sx={{ width: 500 }}>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: "100%",
+              maxWidth: "500px", // Set your width here
+            },
+          },
+        }}
+      >
+        <DialogTitle textAlign={"center"}>
+          Create New Addon Category
+        </DialogTitle>
+        <DialogContent>
           <TextField
             label="Name"
             autoFocus

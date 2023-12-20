@@ -80,12 +80,12 @@ const MenuCategoryDetails = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          p: 3,
         }}
       >
         <TextField
           label="Name"
           defaultValue={menuCategory.name}
-          sx={{ m: "15px" }}
           onChange={(evt) => setData({ ...data, name: evt.target.value })}
         />
         <FormControlLabel
