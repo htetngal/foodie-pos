@@ -1,7 +1,6 @@
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { createLocationFunction } from "@/store/slices/locationSlice";
 import { setOpenSnackbar } from "@/store/slices/snackbarSlice";
-import { CreateLocationOptions } from "@/types/location";
 import {
   Box,
   Button,
@@ -18,17 +17,17 @@ interface Props {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const defaultLocation: CreateLocationOptions = {
+const defaultLocation = {
   name: "",
   street: "",
   township: "",
   city: "",
-  companyId: 0,
 };
 
 const NewLocation = ({ open, setOpen }: Props) => {
   const [location, setLocation] = useState(defaultLocation);
   const dispatch = useAppDispatch();
+  const companyId = useAppSelector((state) => state.company.item?.id);
 
   const onSuccess = () => {
     setOpen(false);
@@ -51,11 +50,14 @@ const NewLocation = ({ open, setOpen }: Props) => {
     );
   };
 
+  if (!companyId) return null;
+
   const handleCreateLocation = () => {
     dispatch(
       createLocationFunction({
         ...location,
         onSuccess,
+        companyId,
       })
     );
   };

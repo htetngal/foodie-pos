@@ -32,15 +32,14 @@ const OrderAppLayout = ({ children }: Props) => {
       <Box
         sx={{
           position: "relative",
-          zIndex: 10,
-          top: isHome ? 300 : 300,
+          top: { xs: 100, sm: 300 },
         }}
       >
         <Box
           sx={{
             width: { xs: "100%", md: "80%", lg: "55%" },
-
             m: "0 auto",
+            p: { xs: 5, md: 0 },
           }}
         >
           {children}

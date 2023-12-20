@@ -1,15 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { prisma } from "../../../../utils/db";
+import { prisma } from "../../../../../utils/db";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = getServerSession();
-  if (!session) return res.status(401).send("Not Authorized");
-
   const method = req.method;
 
   if (method === "POST") {
@@ -39,4 +35,5 @@ export default async function handler(
     await prisma.addon.update({ data: { isArchived: true }, where: { id } });
     return res.status(200).send("OK");
   }
+  return res.status(405).send("Method Not Allowed");
 }

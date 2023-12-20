@@ -40,7 +40,7 @@ const OrderAppFooter = () => {
         p: 1.5,
       }}
     >
-      <Typography sx={{ color: "info.main", fontSize: 18 }}>
+      <Typography sx={{ color: "info.main", fontSize: { xs: 15, sm: 18 } }}>
         You have {activeOrder.length} active order.Click{" "}
         <Link
           href={{
@@ -49,7 +49,7 @@ const OrderAppFooter = () => {
           }}
         >
           here
-        </Link>{" "}
+        </Link>
         to view.
       </Typography>
     </Box>

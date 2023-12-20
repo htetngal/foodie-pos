@@ -20,11 +20,21 @@ const CartIcon = ({ cartItems }: Props) => {
       <IconButton aria-label="cart">
         {cartItems.length ? (
           <StyledBadge badgeContent={cartItems.length} color="secondary">
-            <ShoppingCartIcon sx={{ fontSize: 40, color: "white" }} />
+            <ShoppingCartIcon
+              sx={{
+                fontSize: 40,
+                color: "secondary.main",
+              }}
+            />
           </StyledBadge>
         ) : (
           <StyledBadge badgeContent={null} color="secondary">
-            <ShoppingCartIcon sx={{ fontSize: 40, color: "white" }} />
+            <ShoppingCartIcon
+              sx={{
+                fontSize: 40,
+                color: "secondary.main",
+              }}
+            />
           </StyledBadge>
         )}
       </IconButton>

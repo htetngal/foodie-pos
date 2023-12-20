@@ -19,7 +19,7 @@ export const createOrderFunction = createAsyncThunk(
     const { tableId, cartItems, onSuccess, onError } = options;
 
     try {
-      const response = await fetch(`${config.apiBaseUrl}/order`, {
+      const response = await fetch(`${config.orderAppApiBaseUrl}/order`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ tableId, cartItems }),
@@ -42,7 +42,7 @@ export const updateOrderFunction = createAsyncThunk(
 
     try {
       const response = await fetch(
-        `${config.apiBaseUrl}/order?itemId=${itemId}`,
+        `${config.orderAppApiBaseUrl}/order?itemId=${itemId}`,
         {
           method: "PUT",
           headers: { "content-type": "application/json" },

@@ -61,7 +61,7 @@ const OrderApp = () => {
           ))}
         </Tabs>
       </Box>
-      <Box sx={{ display: "flex" }}>{renderMenus()}</Box>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>{renderMenus()}</Box>
     </Box>
   );
 };

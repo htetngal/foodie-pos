@@ -15,7 +15,7 @@ const Locations = () => {
   return (
     <Box>
       <Button onClick={() => setopen(true)}>Create New Location</Button>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
         {locations.map((item) => (
           // <Link
           //   href={`/backoffice/locations/${item.id}`}

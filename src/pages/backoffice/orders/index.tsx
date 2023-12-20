@@ -16,16 +16,27 @@ const Orders = () => {
   const tables = useAppSelector((state) => state.table.items);
   const menus = useAppSelector((state) => state.menu.items);
   const addons = useAppSelector((state) => state.addon.items);
+  const { selectedlocation } = useAppSelector((state) => state.location);
   const [orderItems, setOrderItems] = useState<OrderItem[]>([]);
   const [value, setValue] = useState<ORDERSTATUS>(ORDERSTATUS.PENDING);
-  console.log(value);
 
   const handleOrderStatus = (itemId: string, orderStatus: ORDERSTATUS) => {
     dispatch(updateOrderFunction({ itemId, orderStatus }));
   };
   useEffect(() => {
     if (allOrders.length) {
-      const formattedOrder = formatOrderItem(allOrders, tables, menus, addons);
+      const selectedLocationtableIds = tables
+        .filter((table) => table.locationId === selectedlocation?.id)
+        .map((item) => item.id);
+      const selectedLocationOrders = allOrders.filter((order) =>
+        selectedLocationtableIds.includes(order.tableId)
+      );
+      const formattedOrder = formatOrderItem(
+        selectedLocationOrders,
+        tables,
+        menus,
+        addons
+      );
       const filteredOrderItems = formattedOrder.filter(
         (item) => item.status === value
       );

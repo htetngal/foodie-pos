@@ -27,7 +27,7 @@ export const getMenus = createAsyncThunk(
     const { locationId, onSuccess, onError } = options;
     try {
       const response = await fetch(
-        `${config.apiBaseUrl}/menu?locationId=${options.locationId}`
+        `${config.backofficeApiBaseUrl}/menu?locationId=${options.locationId}`
       );
       const menus = await response.json();
       thunkApi.dispatch(setMenus(menus));
@@ -51,7 +51,7 @@ export const createNewMenu = createAsyncThunk(
       onError,
     } = options;
     try {
-      const response = await fetch(`${config.apiBaseUrl}/menu`, {
+      const response = await fetch(`${config.backofficeApiBaseUrl}/menu`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -89,7 +89,7 @@ export const updateMenuFunction = createAsyncThunk(
     } = options;
 
     try {
-      const response = await fetch(`${config.apiBaseUrl}/menu`, {
+      const response = await fetch(`${config.backofficeApiBaseUrl}/menu`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({

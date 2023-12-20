@@ -8,13 +8,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import TableBarIcon from "@mui/icons-material/TableBar";
 import {
   Box,
+  Button,
   Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export const sidebarItems = [
@@ -105,6 +106,18 @@ const Sidebar = () => {
                 </ListItem>
               </Link>
             ))}
+            <Box sx={{ textAlign: "center", display: { sm: "none" } }}>
+              <Button
+                onClick={() => signOut({ callbackUrl: "/backoffice" })}
+                variant="contained"
+                sx={{
+                  color: "secondary.main",
+                  backgroundColor: "success.main",
+                }}
+              >
+                Sign Out
+              </Button>
+            </Box>
           </List>
         </Box>
       )}

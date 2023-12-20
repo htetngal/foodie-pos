@@ -1,15 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { prisma } from "../../../../utils/db";
-import { authOptions } from "../auth/[...nextauth]";
+import { prisma } from "../../../../../utils/db";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = getServerSession(req, res, authOptions);
-  if (!session) res.status(401).json("Not authorized");
-
   const method = req.method;
 
   if (method === "POST") {
@@ -158,8 +153,8 @@ export default async function handler(
       where: { id },
     });
 
-    res.status(200).send("Deleted");
+    return res.status(200).send("Deleted");
   }
 
-  res.status(200).json({ name: "John Doe" });
+  return res.status(405).send("Method Not Allowed");
 }

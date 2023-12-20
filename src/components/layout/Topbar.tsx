@@ -1,29 +1,35 @@
 import { useAppSelector } from "@/store/hooks";
-import { Box, Button, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box, Button, Drawer, IconButton, Typography } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useState } from "react";
 import logo from "../../assets/logo.png";
+import Sidebar from "./Sidebar";
 
 const Topbar = () => {
   const { data: session } = useSession();
   const { selectedlocation } = useAppSelector((state) => state.location);
+  const [open, setOpen] = useState(false);
+  const company = useAppSelector((state) => state.company.item);
   return (
     <Box
       sx={{
         bgcolor: "primary.main",
         padding: 2,
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", sm: "row" },
         justifyContent: "space-between",
-        alignItem: "center",
+        alignItems: "center",
       }}
     >
       <Box
         sx={{
           height: "70px",
           width: "100px",
-          ml: { xs: "auto", md: 0 },
-          mr: { xs: "auto", md: 0 },
+          // ml: { xs: "auto", sm: 0 },
+          // mr: { xs: "auto", scrollMarginBlockEnd: 0 },
+          display: { xs: "none", sm: "inherit" },
         }}
       >
         <Image src={logo} alt="" style={{ width: "100%", height: "100%" }} />
@@ -32,17 +38,17 @@ const Topbar = () => {
         <Typography
           sx={{
             color: "secondary.main",
-            fontSize: { xs: 50, md: 100 },
+            fontSize: { xs: 50, sm: 80 },
             textAlign: "center",
           }}
         >
-          Foodie POS
+          {company?.name}
         </Typography>
         {selectedlocation && (
           <Typography
             sx={{
               color: "secondary.main",
-              fontSize: { xs: 15, md: 20 },
+              fontSize: { xs: 15, sm: 20 },
               textAlign: "center",
             }}
           >
@@ -53,15 +59,15 @@ const Topbar = () => {
       {session ? (
         <Box
           sx={{
-            display: "flex",
+            display: { xs: "none", sm: "flex" },
             justifyContent: "center",
             alignItems: "center",
           }}
         >
           <Button
             onClick={() => signOut({ callbackUrl: "/backoffice" })}
-            variant="outlined"
-            sx={{ color: "secondary.main" }}
+            variant="contained"
+            sx={{ color: "secondary.main", backgroundColor: "success.main" }}
           >
             Sign Out
           </Button>
@@ -69,6 +75,22 @@ const Topbar = () => {
       ) : (
         <span></span>
       )}
+      <Box sx={{ display: { xs: "inharit", sm: "none" } }}>
+        <IconButton
+          onClick={() => setOpen(true)}
+          sx={{ color: "secondary.main" }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Drawer
+          anchor={"left"}
+          open={open}
+          onClose={() => setOpen(false)}
+          onClick={() => setOpen(false)}
+        >
+          <Sidebar />
+        </Drawer>
+      </Box>
     </Box>
   );
 };

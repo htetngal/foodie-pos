@@ -11,19 +11,24 @@ interface Props {
 }
 const OrderAppHeader = (cartItemCount: Props) => {
   const router = useRouter();
-  const isCart = router.pathname === "/order/cart";
+  const isCart =
+    router.pathname === "/order/cart" ||
+    router.pathname.includes("/order/active-order");
   const showCartIcon = !isCart;
   const cartItems = useAppSelector((state) => state.cart.items);
+  const company = useAppSelector((state) => state.company.item);
 
   return (
-    <Box sx={{ position: "fixed", width: "100vw", top: 0 }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "start",
-        }}
-      >
+    <Box
+      sx={{
+        position: "fixed",
+        width: "100vw",
+        top: 0,
+        p: { xs: 5, sm: 0 },
+        backgroundColor: "primary.main",
+      }}
+    >
+      <Box sx={{ display: { xs: "none", sm: "flex" } }}>
         <Image
           src="/orderAppHeader.svg"
           width={0}
@@ -32,24 +37,42 @@ const OrderAppHeader = (cartItemCount: Props) => {
           style={{ width: "100%", height: "auto" }}
           alt="header-image"
         />
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: { xs: "space-between", sm: "center" },
+          alignItems: "start",
+        }}
+      >
         <Box
           sx={{
             position: "absolute",
             top: 40,
+            textAlign: "center",
             color: "secondary.main",
           }}
         >
-          <Typography sx={{ fontSize: 50 }}>Ah Wa Sar</Typography>
-          <Typography>No.18, HinTaDa Street, SanChaung</Typography>
+          <Typography sx={{ fontSize: { xs: 25, sm: 50 } }}>
+            {company?.name}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: 18,
+              display: { xs: "none", sm: "inherit" },
+            }}
+          >
+            {company?.township}
+          </Typography>
         </Box>
 
         {showCartIcon && (
           <Box
             sx={{
               position: "absolute",
-              top: 40,
-              right: { xs: 30, md: 50, xl: 100 },
-              color: "secondary.main",
+              top: 30,
+              right: { xs: 30, sm: 50 },
               display: "flex",
             }}
             onClick={() => {
@@ -63,8 +86,8 @@ const OrderAppHeader = (cartItemCount: Props) => {
           <Box
             sx={{
               position: "absolute",
-              top: 40,
-              right: { xs: 30, md: 50, xl: 100 },
+              top: 30,
+              right: { xs: 30, sm: 50 },
               color: "secondary.main",
               display: "flex",
             }}

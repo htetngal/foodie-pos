@@ -1,32 +1,32 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { prisma } from "../../../../utils/db";
-import { getQrCodeUrl, qrCodeImageUpload } from "../../../../utils/fileUpload";
-import { authOptions } from "../auth/[...nextauth]";
+import { prisma } from "../../../../../utils/db";
+import {
+  getQrCodeUrl,
+  qrCodeImageUpload,
+} from "../../../../../utils/fileUpload";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-  if (!session) return res.status(401).send("Not Authorized");
-
   const method = req.method;
 
   if (method === "POST") {
     const { name, locationId } = req.body;
-    const user = session.user;
-    const email = user?.email as string;
-    const dbUser = await prisma.user.findFirst({ where: { email } });
-    const isValid = name && locationId && dbUser;
+
+    const isValid = name && locationId;
     if (!isValid) return res.status(400).send("Bad Request");
 
     const table = await prisma.table.create({
       data: { name, locationId, assetUrl: "" },
     });
 
-    const companyId = dbUser.companyId;
+    const companyId = (
+      await prisma.location.findFirst({
+        where: { id: locationId },
+      })
+    )?.companyId;
     const tableId = table.id;
     await qrCodeImageUpload(tableId);
     const assetUrl = getQrCodeUrl(tableId);
@@ -55,5 +55,5 @@ export default async function handler(
     return res.status(200).send("OK");
   }
 
-  res.status(200).json({ name: "John Doe" });
+  return res.status(405).send("Method not allowed");
 }

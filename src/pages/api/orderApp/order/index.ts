@@ -2,7 +2,7 @@ import { CartItem } from "@/types/cart";
 import { ORDERSTATUS } from "@prisma/client";
 import { nanoid } from "nanoid";
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../../utils/db";
+import { prisma } from "../../../../../utils/db";
 
 export default async function handler(
   req: NextApiRequest,

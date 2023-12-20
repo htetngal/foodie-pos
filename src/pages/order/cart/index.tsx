@@ -90,16 +90,16 @@ const Index = () => {
           borderRadius: 4,
         }}
       >
-        <Typography variant="h2" textAlign={"center"}>
+        <Typography textAlign={"center"} sx={{ fontSize: { xs: 25, sm: 30 } }}>
           Review Your Order
         </Typography>
-        <Box sx={{ p: 2 }}>
+        <Box sx={{}}>
           {cartItems.map((cartItem) => (
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                mb: 2,
+                mt: 3,
               }}
               key={cartItem.id}
             >
@@ -148,7 +148,7 @@ const Index = () => {
             </Box>
           ))}
         </Box>
-        <Divider sx={{ m: 2 }} />
+        <Divider sx={{ m: 3 }} />
         <Typography textAlign={"right"} variant="h5">
           Total Price: {getCartTotalPrice(cartItems)}
         </Typography>
@@ -157,6 +157,7 @@ const Index = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            mt: 3,
           }}
         >
           <Button variant="contained" onClick={handleConfirmOrder}>

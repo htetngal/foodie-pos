@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { fileUpload } from "../../../../utils/fileUpload";
+import { fileUpload } from "../../../../../utils/fileUpload";
 
 export const config = {
   api: {

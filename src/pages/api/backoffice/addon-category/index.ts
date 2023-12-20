@@ -1,16 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { prisma } from "../../../../utils/db";
-import { authOptions } from "../auth/[...nextauth]";
+import { prisma } from "../../../../../utils/db";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = getServerSession(req, res, authOptions);
-  if (!session) res.status(401).send("Not Authorized");
-
   const method = req.method;
   if (method === "POST") {
     const { name, isRequired, menuIds } = req.body;
@@ -57,5 +52,5 @@ export default async function handler(
       .json({ updatedAddonCategory, updatedMenuAddonCategory });
   }
 
-  res.status(200).json({ name: "John Doe" });
+  return res.status(405).send("Method Not Allowed");
 }

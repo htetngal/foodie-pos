@@ -1,15 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
-import { prisma } from "../../../../utils/db";
-import { authOptions } from "../auth/[...nextauth]";
+import { prisma } from "../../../../../utils/db";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getServerSession(req, res, authOptions);
-  if (!session) return res.status(401).send("Not Authorized");
-
   const method = req.method;
   if (method === "PUT") {
     const { id, name, street, township, city } = req.body;
@@ -24,5 +19,5 @@ export default async function handler(
 
     return res.status(200).json({ company });
   }
-  res.status(200).send("Hello");
+  return res.status(405).send("Method Not Allowed");
 }
